@@ -1,6 +1,9 @@
-# UNIVERSAAL_AGENT
+# UNIVERSAAL_AGENT [ARCHIVED]
 
-AI Agent project.
+> **This repository has been merged into [agent_full](https://github.com/TeWei02/agent_full).**
+> This repo is kept as a historical reference only.
+
+AI Agent project (archived).
 
 ## License
 
