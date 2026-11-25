@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  docs-checks:
+    name: Docs checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Repository self-check (zero dependency)
+        run: python3 scripts/check_docs.py
+
+      - name: Verify bilingual README cross-links
+        run: |
+          test -f README.md && test -f README.en.md
+          grep -q "README.en.md" README.md
+          grep -q "README.md" README.en.md
+          echo "bilingual README cross-links ok"
